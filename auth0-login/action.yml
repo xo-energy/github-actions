@@ -1,0 +1,30 @@
+name: Auth0 Login
+description: Obtain a JWT access token from Auth0
+inputs:
+  audience:
+    description: Auth0 API audience identifier
+    required: true
+  client-id:
+    description: Auth0 API client ID
+    required: true
+  client-secret:
+    description: Auth0 API client secret
+    required: true
+  domain:
+    description: Fully-qualified domain name for the authorization request
+    required: true
+outputs:
+  token:
+    description: JWT access token
+    value: ${{ steps.login.outputs.token }}
+runs:
+  using: composite
+  steps:
+    - id: login
+      shell: bash
+      env:
+        AUTH0_AUDIENCE: ${{ inputs.audience }}
+        AUTH0_CLIENT_ID: ${{ inputs.client-id }}
+        AUTH0_CLIENT_SECRET: ${{ inputs.client-secret }}
+        AUTH0_DOMAIN: ${{ inputs.domain }}
+      run: ${{ github.action_path }}/login.sh
