@@ -4,7 +4,7 @@ inputs:
   destination:
     description: Destination directory for the NuGet.Config file
     required: true
-    default: '.'
+    default: '${{ github.workspace }}'
 runs:
   using: composite
   steps:
