@@ -21,4 +21,4 @@ token=$(curl -fsS \
 
 # set the token as a secret and export it
 echo "::add-mask::$token"
-echo "::set-output name=token::$token"
+echo "token=$token" >> "$GITHUB_OUTPUT"
